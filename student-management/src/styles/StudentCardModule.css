@@ -1,0 +1,102 @@
+.student-card {
+	min-width: 0;
+	padding: 19px;
+	border: 1px solid #e9edf5;
+	border-radius: 17px;
+	background: linear-gradient(150deg, #fff, #fbfcff);
+	transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.student-card:hover {
+	transform: translateY(-3px);
+	border-color: #d7ddf6;
+	box-shadow: 0 12px 24px rgb(44 59 105 / 8%);
+}
+
+.student-card-top {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	margin-bottom: 17px;
+}
+
+.student-avatar {
+	display: grid;
+	width: 42px;
+	height: 42px;
+	place-items: center;
+	border: 1px solid #e0e5ff;
+	border-radius: 14px;
+	background: #f0f2ff;
+	color: #4f62d8;
+	font-family: "Manrope", sans-serif;
+	font-size: 17px;
+	font-weight: 800;
+}
+
+.grade-badge {
+	padding: 6px 9px;
+	border-radius: 999px;
+	background: #eef8f3;
+	color: #39815f;
+	font-size: 10px;
+	font-weight: 700;
+}
+
+.grade-1,
+.grade-2 {
+	background: #eaf7f0;
+	color: #34825d;
+}
+
+.grade-3,
+.grade-4 {
+	background: #fff5e5;
+	color: #a87520;
+}
+
+.grade-5,
+.grade-6 {
+	background: #fff0ef;
+	color: #b75550;
+}
+
+.student-card h3 {
+	overflow: hidden;
+	margin: 0;
+	color: #1d2942;
+	font-family: "Manrope", sans-serif;
+	font-size: 16px;
+	font-weight: 700;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.student-card-label {
+	margin: 4px 0 15px;
+	color: #8a94a8;
+	font-size: 11px;
+}
+
+.student-card-divider {
+	height: 1px;
+	margin-bottom: 12px;
+	background: #edf0f5;
+}
+
+.student-detail {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	margin: 0;
+	color: #818ba0;
+	font-size: 11px;
+}
+
+.student-detail strong {
+	color: #3e4a62;
+	font-size: 12px;
+	font-weight: 600;
+}
