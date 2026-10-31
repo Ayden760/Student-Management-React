@@ -3,7 +3,7 @@ import type { Student } from "./types/student";
 
 import "./styles/App.css";
 import StudentForm from "./components/StudentForm";
-import StudentCard from "./components/StudentCard";
+import StudentList from "./components/StudentList";
 
 function App() {
   const [students, setStudents] = useState<Student[]>([
@@ -26,10 +26,20 @@ function App() {
       grade: 3,
     },
   ]);
+  // Add a new student
+  function addStudent(newStudent: Student): void {
+    setStudents((prev) => [...prev, newStudent]);
+  }
+  function deleteStudent(id: number) {
+    // React automatically passes the latest state as an argument to the callback function.
+    setStudents((prevStudents) =>
+      prevStudents.filter((student) => student.id !== id),
+    );
+  }
 
   return (
     <main className="app-shell">
-      //header of the side
+      {/*header of the side*/}
       <header className="page-header">
         <div className="brand-mark" aria-hidden="true">
           S
@@ -42,36 +52,11 @@ function App() {
           </p>
         </div>
       </header>
-      //Shows all Students
-      <div className="dashboard-layout">
-        <section className="student-section" aria-labelledby="students-title">
-          <div className="section-heading">
-            <div>
-              <p className="eyebrow">OVERVIEW</p>
-              <h2 id="students-title">Your Students</h2>
-            </div>
-            <span className="student-count">
-              {students.length} {students.length === 1 ? "student" : "students"}
-            </span>
-          </div>
 
-          {students.length === 0 ? (
-            <div className="empty-state">
-              <span className="empty-icon" aria-hidden="true">
-                ＋
-              </span>
-              <h3>No students yet</h3>
-              <p>Add your first student using the form.</p>
-            </div>
-          ) : (
-            <div className="student-grid">
-              {students.map((student) => (
-                <StudentCard key={student.id} student={student} />
-              ))}
-            </div>
-          )}
-        </section>
-        //Student Form to add one
+      <div className="dashboard-layout">
+        {/*Shows all Students*/}
+        <StudentList onDeleteStudent={deleteStudent} students={students} />
+        {/*Student Form to add one*/}
         <aside className="form-panel">
           <div className="panel-heading">
             <span className="panel-icon" aria-hidden="true">
@@ -82,7 +67,7 @@ function App() {
               <p className="panel-caption">Add a student</p>
             </div>
           </div>
-          <StudentForm />
+          <StudentForm onAddStudent={addStudent} />
         </aside>
       </div>
     </main>
