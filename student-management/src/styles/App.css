@@ -254,10 +254,6 @@ select {
 	transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
 }
 
-.form-field input::placeholder {
-	color: #a4adbd;
-}
-
 .form-field input:focus,
 .form-field select:focus {
 	border-color: #8390ec;
@@ -265,23 +261,37 @@ select {
 	box-shadow: 0 0 0 3px rgb(79 98 216 / 12%);
 }
 
-.submit-button {
+.form-actions {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 9px;
+	margin-top: 21px;
+}
+
+.form-actions.is-editing {
+	grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.submit-button,
+.cancel-button {
 	display: flex;
 	width: 100%;
 	min-height: 46px;
 	align-items: center;
 	justify-content: space-between;
-	margin-top: 21px;
 	padding: 0 15px;
-	border: 0;
 	border-radius: 12px;
-	background: linear-gradient(110deg, #586be0, #485acb);
-	box-shadow: 0 8px 16px rgb(79 98 216 / 20%);
-	color: white;
 	cursor: pointer;
 	font-size: 13px;
 	font-weight: 600;
 	transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.submit-button {
+	border: 0;
+	background: linear-gradient(110deg, #586be0, #485acb);
+	box-shadow: 0 8px 16px rgb(79 98 216 / 20%);
+	color: white;
 }
 
 .submit-button:hover {
@@ -297,6 +307,23 @@ select {
 
 .submit-button span {
 	font-size: 18px;
+}
+
+.cancel-button {
+	width: auto;
+	justify-content: center;
+	border: 1px solid var(--color-border);
+	background: #fff;
+	color: #596680;
+}
+
+.cancel-button:hover {
+	background: #f7f8fc;
+}
+
+.cancel-button:focus-visible {
+	outline: 3px solid rgb(79 98 216 / 20%);
+	outline-offset: 2px;
 }
 
 @media (max-width: 850px) {

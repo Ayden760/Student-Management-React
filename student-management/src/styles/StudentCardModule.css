@@ -102,25 +102,54 @@
 	font-weight: 600;
 }
 
+.student-card-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 17px;
+}
+
+.student-edit-button,
 .student-delete-button {
 	display: inline-flex;
 	min-height: 36px;
 	align-items: center;
 	justify-content: center;
 	gap: 7px;
-	margin-top: 17px;
 	padding: 0 11px;
-	border: 1px solid #f1dede;
 	border-radius: 10px;
-	background: #fffafa;
-	color: #b94d55;
 	cursor: pointer;
 	font: inherit;
 	font-size: 11px;
 	font-weight: 600;
-	transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
+	transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
 }
 
+.student-edit-button {
+	border: 1px solid #e0e5f7;
+	background: #f7f8ff;
+	color: #4f62c8;
+}
+
+.student-edit-button:hover {
+	transform: translateY(-1px);
+	border-color: #cbd3f4;
+	background: #eef0ff;
+	box-shadow: 0 4px 10px rgb(79 98 216 / 9%);
+}
+
+.student-edit-button:focus-visible {
+	outline: 3px solid rgb(79 98 216 / 22%);
+	outline-offset: 2px;
+}
+
+.student-delete-button {
+	border: 1px solid #f1dede;
+	background: #fffafa;
+	color: #b94d55;
+}
+
+.student-edit-button svg,
 .student-delete-button svg {
 	width: 16px;
 	height: 16px;
@@ -139,6 +168,7 @@
 	outline-offset: 2px;
 }
 
+.student-edit-button:active,
 .student-delete-button:active {
 	transform: translateY(0);
 }

@@ -6,11 +6,13 @@ import StudentCard from "./StudentCard";
 interface StudentListProps {
   students: Student[];
   onDeleteStudent: (id: number) => void;
+  onEditStudent: (student: Student) => void;
 }
 
 export default function StudentList({
   students,
   onDeleteStudent,
+  onEditStudent,
 }: StudentListProps) {
   return (
     <section className="student-section" aria-labelledby="students-title">
@@ -39,6 +41,7 @@ export default function StudentList({
               key={student.id}
               student={student}
               onDeleteStudent={onDeleteStudent}
+              onEditStudent={onEditStudent}
             />
           ))}
         </div>
