@@ -1,0 +1,185 @@
+.student-stats {
+	margin-bottom: 24px;
+	padding: 25px;
+	border: 1px solid rgb(226 231 241 / 85%);
+	border-radius: 22px;
+	background: rgb(255 255 255 / 90%);
+	box-shadow: 0 14px 40px rgb(35 49 83 / 5%);
+}
+
+.stats-heading {
+	display: flex;
+	align-items: end;
+	justify-content: space-between;
+	gap: 16px;
+	margin-bottom: 20px;
+}
+
+.stats-heading .eyebrow {
+	margin-bottom: 5px;
+}
+
+.stats-heading h2 {
+	margin: 0;
+	color: #1d2942;
+	font-family: "Manrope", sans-serif;
+	font-size: 20px;
+	letter-spacing: -0.5px;
+}
+
+.stats-description {
+	margin: 0 0 2px;
+	color: var(--color-muted);
+	font-size: 12px;
+}
+
+.stats-summary {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 14px;
+}
+
+.stat-card {
+	display: flex;
+	min-width: 0;
+	align-items: center;
+	gap: 14px;
+	padding: 18px;
+	border: 1px solid #e8ecf5;
+	border-radius: 16px;
+	background: #fbfcff;
+}
+
+.stat-card-primary .stat-icon {
+	background: #eef0ff;
+	color: #4f62d8;
+}
+
+.stat-card-age .stat-icon {
+	background: #eaf7f0;
+	color: #39815f;
+}
+
+.stat-icon {
+	display: grid;
+	width: 44px;
+	height: 44px;
+	flex: 0 0 auto;
+	place-items: center;
+	border-radius: 14px;
+	font-size: 22px;
+}
+
+.stat-card > div {
+	min-width: 0;
+}
+
+.stat-label,
+.stat-support {
+	margin: 0;
+	color: var(--color-muted);
+	font-size: 11px;
+}
+
+.stat-value {
+	display: block;
+	margin: 3px 0 2px;
+	color: #1d2942;
+	font-family: "Manrope", sans-serif;
+	font-size: 24px;
+	line-height: 1.15;
+}
+
+.stat-value small {
+	font-family: "DM Sans", sans-serif;
+	font-size: 11px;
+	font-weight: 500;
+}
+
+.grade-stats {
+	display: grid;
+	grid-template-columns: repeat(6, minmax(0, 1fr));
+	gap: 10px;
+	margin-top: 14px;
+}
+
+.grade-stat {
+	min-width: 0;
+	padding: 12px;
+	border: 1px solid #e9edf5;
+	border-radius: 13px;
+	background: #fff;
+}
+
+.grade-stat-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 6px;
+	margin-bottom: 10px;
+	color: #596680;
+	font-size: 10px;
+}
+
+.grade-stat-heading strong {
+	color: #26324b;
+	font-size: 12px;
+}
+
+.grade-stat-track {
+	height: 5px;
+	overflow: hidden;
+	border-radius: 999px;
+	background: #edf0f6;
+}
+
+.grade-stat-track span {
+	display: block;
+	height: 100%;
+	min-width: 0;
+	border-radius: inherit;
+	background: #6475e5;
+	transition: width 240ms ease;
+}
+
+.grade-stat-1 .grade-stat-track span,
+.grade-stat-2 .grade-stat-track span {
+	background: #55a37d;
+}
+
+.grade-stat-3 .grade-stat-track span,
+.grade-stat-4 .grade-stat-track span {
+	background: #d7a24a;
+}
+
+.grade-stat-5 .grade-stat-track span,
+.grade-stat-6 .grade-stat-track span {
+	background: #d67570;
+}
+
+@media (max-width: 850px) {
+	.grade-stats {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 520px) {
+	.student-stats {
+		padding: 20px;
+		border-radius: 18px;
+	}
+
+	.stats-heading {
+		align-items: flex-start;
+		flex-direction: column;
+		gap: 6px;
+	}
+
+	.stats-summary {
+		grid-template-columns: 1fr;
+	}
+
+	.grade-stats {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
