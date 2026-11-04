@@ -148,6 +148,8 @@ function App() {
         </select>
       </div>
 
+      <StudentStats students={students} />
+
       <div className="dashboard-layout">
         {/*Shows all Students*/}
         <StudentList
@@ -178,7 +180,6 @@ function App() {
             onUpdateStudent={updateStudent}
             onCancelEdit={() => setEditingStudent(null)}
           />
-          <StudentStats students={filteredStudents} />
         </aside>
       </div>
     </main>

@@ -1,0 +1,144 @@
+.panel-heading {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 24px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid var(--color-border);
+}
+
+.panel-icon {
+	display: grid;
+	width: 40px;
+	height: 40px;
+	place-items: center;
+	border-radius: 13px;
+	background: #eef0ff;
+	color: var(--color-primary);
+	font-size: 23px;
+}
+
+.panel-heading .eyebrow {
+	margin-bottom: 3px;
+}
+
+.panel-caption {
+	margin: 0;
+	color: #26324b;
+	font-family: "Manrope", sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.student-form h2 {
+	margin: 0;
+	color: #1d2942;
+	font-family: "Manrope", sans-serif;
+	font-size: 17px;
+	letter-spacing: -0.7px;
+}
+
+.form-description {
+	margin: 7px 0 21px;
+	color: var(--color-muted);
+	font-size: 12px;
+	line-height: 1.6;
+}
+
+.form-field {
+	display: grid;
+	gap: 7px;
+	margin-bottom: 16px;
+}
+
+.form-field label {
+	color: #46516a;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.form-field input,
+.form-field select {
+	width: 100%;
+	min-height: 44px;
+	padding: 0 12px;
+	border: 1px solid #e1e6f0;
+	border-radius: 11px;
+	outline: none;
+	background: #fbfcfe;
+	color: #26324b;
+	font-size: 13px;
+	transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+	border-color: #8390ec;
+	background: white;
+	box-shadow: 0 0 0 3px rgb(79 98 216 / 12%);
+}
+
+.form-actions {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 9px;
+	margin-top: 21px;
+}
+
+.form-actions.is-editing {
+	grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.submit-button,
+.cancel-button {
+	display: flex;
+	width: 100%;
+	min-height: 46px;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 15px;
+	border-radius: 12px;
+	cursor: pointer;
+	font-size: 13px;
+	font-weight: 600;
+	transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.submit-button {
+	border: 0;
+	background: linear-gradient(110deg, #586be0, #485acb);
+	box-shadow: 0 8px 16px rgb(79 98 216 / 20%);
+	color: white;
+}
+
+.submit-button:hover {
+	transform: translateY(-1px);
+	background: linear-gradient(110deg, #4e61d3, var(--color-primary-dark));
+	box-shadow: 0 11px 20px rgb(79 98 216 / 26%);
+}
+
+.submit-button:focus-visible {
+	outline: 3px solid rgb(79 98 216 / 30%);
+	outline-offset: 3px;
+}
+
+.submit-button span {
+	font-size: 18px;
+}
+
+.cancel-button {
+	width: auto;
+	justify-content: center;
+	border: 1px solid var(--color-border);
+	background: #fff;
+	color: #596680;
+}
+
+.cancel-button:hover {
+	background: #f7f8fc;
+}
+
+.cancel-button:focus-visible {
+	outline: 3px solid rgb(79 98 216 / 20%);
+	outline-offset: 2px;
+}

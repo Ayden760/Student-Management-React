@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import type { Student } from "../types/student";
+import "../styles/StudentForm.css";
 
 interface StudentFormData {
   name: string;

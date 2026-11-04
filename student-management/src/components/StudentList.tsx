@@ -2,6 +2,7 @@
 // The "type" keyword indicates that Student is a TypeScript type.
 import type { Student } from "../types/student";
 import StudentCard from "./StudentCard";
+import "../styles/StudentList.css";
 
 interface StudentListProps {
   students: Student[];
