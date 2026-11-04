@@ -1,9 +1,10 @@
 import { useState } from "react";
-import type { Student } from "./types/student";
+import type { Student, Grade } from "./types/student";
 
 import "./styles/App.css";
 import StudentForm from "./components/StudentForm";
 import StudentList from "./components/StudentList";
+import StudentStats from "./components/StudentStats";
 
 function App() {
   const [students, setStudents] = useState<Student[]>([
@@ -25,9 +26,55 @@ function App() {
       age: 18,
       grade: 3,
     },
+    {
+      id: 4,
+      name: "Dieter",
+      age: 19,
+      grade: 4,
+    },
+    {
+      id: 5,
+      name: "Kenny",
+      age: 20,
+      grade: 5,
+    },
+    {
+      id: 6,
+      name: "Adrian",
+      age: 34,
+      grade: 6,
+    },
+    {
+      id: 7,
+      name: "Ingrid",
+      age: 67,
+      grade: 2,
+    },
+    {
+      id: 8,
+      name: "Micha",
+      age: 6,
+      grade: 3,
+    },
   ]);
+
   //Union Type for Editing
   const [editingStudent, setEditingStudent] = useState<Student | null>(null);
+
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
+  const [gradeFilter, setGradeFilter] = useState<Grade | "all">("all");
+
+  const filteredStudents = students.filter((student) => {
+    const matchesSearch = student.name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+
+    const matchesGrade = gradeFilter === "all" || student.grade === gradeFilter;
+
+    return matchesSearch && matchesGrade;
+  });
+
   // Add a new student
   function addStudent(studentData: Omit<Student, "id">) {
     const newStudent: Student = {
@@ -74,10 +121,37 @@ function App() {
         </div>
       </header>
 
+      <div className="student-filters">
+        <input
+          type="text"
+          placeholder="Search students..."
+          value={searchTerm}
+          onChange={(event) => setSearchTerm(event.target.value)}
+        />
+        <select
+          value={gradeFilter}
+          onChange={(event) =>
+            setGradeFilter(
+              event.target.value === "all"
+                ? "all"
+                : (Number(event.target.value) as Grade),
+            )
+          }
+        >
+          <option value="all">All Grades</option>
+          <option value="1">Grade 1</option>
+          <option value="2">Grade 2</option>
+          <option value="3">Grade 3</option>
+          <option value="4">Grade 4</option>
+          <option value="5">Grade 5</option>
+          <option value="6">Grade 6</option>
+        </select>
+      </div>
+
       <div className="dashboard-layout">
         {/*Shows all Students*/}
         <StudentList
-          students={students}
+          students={filteredStudents}
           onDeleteStudent={deleteStudent}
           onEditStudent={editStudent}
         />
@@ -104,6 +178,7 @@ function App() {
             onUpdateStudent={updateStudent}
             onCancelEdit={() => setEditingStudent(null)}
           />
+          <StudentStats students={filteredStudents} />
         </aside>
       </div>
     </main>

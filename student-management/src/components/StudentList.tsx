@@ -32,7 +32,10 @@ export default function StudentList({
             ＋
           </span>
           <h3>No students yet</h3>
-          <p>Add your first student using the form.</p>
+          <p>
+            Add your first student using the form or try changing your search or
+            filters.
+          </p>
         </div>
       ) : (
         <div className="student-grid">
