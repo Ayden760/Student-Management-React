@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { Student, Grade } from "./types/student";
 
 import "./styles/App.css";
@@ -58,10 +58,38 @@ function App() {
     },
   ]);
 
+  //useEffect reacts to changes her for a change of students.length
+  useEffect(() => {
+    document.title = `Student Management (${students.length})`;
+  }, [students.length]);
+
   //Union Type for Editing
   const [editingStudent, setEditingStudent] = useState<Student | null>(null);
 
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setEditingStudent(null);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  const [searchTerm, setSearchTerm] = useState<string>(() => {
+    return localStorage.getItem("searchTerm") ?? "";
+  });
+
+  //
+  useEffect(() => {
+    localStorage.setItem("searchTerm", searchTerm);
+  }, [searchTerm]);
+
+  //
 
   const [gradeFilter, setGradeFilter] = useState<Grade | "all">("all");
 
