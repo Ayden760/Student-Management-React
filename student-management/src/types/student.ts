@@ -10,6 +10,8 @@ type Grade = 1| 2|3|4|5|6;
 
 export type StudentCreate = Omit<Student, "id">;
 
+export type StudentUpdate = Partial<StudentCreate>;
+
 //creates Array of 3 students of type student
 const students: Student[] = [
 

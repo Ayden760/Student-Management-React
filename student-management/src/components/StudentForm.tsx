@@ -13,7 +13,7 @@ interface StudentFormData {
 
 interface StudentFormProps {
   editingStudent: Student | null;
-  onAddStudent: (student: Omit<Student, "id">) => void;
+  onAddStudent: (student: Omit<Student, "id">) => Promise<void>;
   onUpdateStudent: (student: Student) => void;
   onCancelEdit: () => void;
 }
@@ -75,7 +75,7 @@ export default function StudentForm({
   }
 
   // Form submission handler, is shown when submit is pressed
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     // Validate inputs
@@ -109,11 +109,15 @@ export default function StudentForm({
         name: name,
       });
     } else {
-      onAddStudent({
-        ...formData,
-
-        name: name,
-      });
+      try {
+        await onAddStudent({
+          ...formData,
+          name,
+        });
+        setFormData({ name: "", age: 0, grade: 1 });
+      } catch {
+        // Keep the entered values so the user can retry after a save failure.
+      }
     }
   }
 

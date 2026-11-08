@@ -1,62 +1,37 @@
 import { useState, useEffect } from "react";
-import type { Student, Grade } from "./types/student";
+import type { Student, Grade, StudentCreate } from "./types/student";
 
 import "./styles/App.css";
 import StudentForm from "./components/StudentForm";
 import StudentList from "./components/StudentList";
 import StudentStats from "./components/StudentStats";
 
+import {
+  getStudents,
+  createStudent,
+  updateStudent as updateStudentApi,
+  deleteStudent as deleteStudentApi,
+} from "./api/studentapi";
+
 function App() {
-  const [students, setStudents] = useState<Student[]>([
-    {
-      id: 1,
-      name: "Max",
-      age: 17,
-      grade: 2,
-    },
-    {
-      id: 2,
-      name: "Lisa",
-      age: 16,
-      grade: 1,
-    },
-    {
-      id: 3,
-      name: "Tim",
-      age: 18,
-      grade: 3,
-    },
-    {
-      id: 4,
-      name: "Dieter",
-      age: 19,
-      grade: 4,
-    },
-    {
-      id: 5,
-      name: "Kenny",
-      age: 20,
-      grade: 5,
-    },
-    {
-      id: 6,
-      name: "Adrian",
-      age: 34,
-      grade: 6,
-    },
-    {
-      id: 7,
-      name: "Ingrid",
-      age: 67,
-      grade: 2,
-    },
-    {
-      id: 8,
-      name: "Micha",
-      age: 6,
-      grade: 3,
-    },
-  ]);
+  const [students, setStudents] = useState<Student[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function loadStudents() {
+      try {
+        const data = await getStudents();
+        setStudents(data);
+      } catch (error) {
+        setError("Could not load students.");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadStudents();
+  }, []);
 
   //useEffect reacts to changes her for a change of students.length
   useEffect(() => {
@@ -104,30 +79,43 @@ function App() {
   });
 
   // Add a new student
-  function addStudent(studentData: Omit<Student, "id">) {
-    const newStudent: Student = {
-      id: Date.now(),
+  async function addStudent(studentData: StudentCreate) {
+    try {
+      const newStudent = await createStudent(studentData);
 
-      ...studentData,
-    };
-
-    setStudents((prevStudents) => [...prevStudents, newStudent]);
-  }
-  function deleteStudent(id: number) {
-    // React automatically passes the latest state as an argument to the callback function.
-    setStudents((prevStudents) =>
-      prevStudents.filter((student) => student.id !== id),
-    );
+      setStudents((prevStudents) => [...prevStudents, newStudent]);
+    } catch (error) {
+      setError("Could not create student.");
+      throw error;
+    }
   }
 
-  function updateStudent(updatedStudent: Student) {
-    setStudents((prevStudents) =>
-      prevStudents.map((student) =>
-        student.id === updatedStudent.id ? updatedStudent : student,
-      ),
-    );
+  async function deleteStudent(id: number) {
+    try {
+      await deleteStudentApi(id);
 
-    setEditingStudent(null);
+      setStudents((prevStudents) =>
+        prevStudents.filter((student) => student.id !== id),
+      );
+    } catch (error) {
+      setError("Could not delete student.");
+    }
+  }
+
+  async function updateStudent(updatedStudent: Student) {
+    try {
+      const { id, ...studentData } = updatedStudent;
+      const updated = await updateStudentApi(id, studentData);
+      setStudents((prevStudents) =>
+        prevStudents.map((student) =>
+          student.id === updated.id ? updated : student,
+        ),
+      );
+
+      setEditingStudent(null);
+    } catch (error) {
+      setError("Could not update student.");
+    }
   }
   function editStudent(student: Student) {
     setEditingStudent(student);
@@ -180,6 +168,9 @@ function App() {
 
       <div className="dashboard-layout">
         {/*Shows all Students*/}
+        {loading && <p>Loading students...</p>}
+
+        {error && <p className="error-message">{error}</p>}
         <StudentList
           students={filteredStudents}
           onDeleteStudent={deleteStudent}
