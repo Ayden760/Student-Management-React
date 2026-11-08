@@ -23,7 +23,7 @@ def get_student(student_id: int, service: StudentServiceDependency) -> StudentRe
     return service.get_student(student_id)
 
 
-@router.put("/{student_id}", response_model=StudentRead)
+@router.patch("/{student_id}", response_model=StudentRead)
 def update_student(
     student_id: int,
     student_data: StudentUpdate,

@@ -25,7 +25,9 @@ class StudentRepository:
         return student
 
     def update(self, student: Student, data: StudentUpdate) -> Student:
-        for field, value in data.model_dump().items():
+        for field, value in data.model_dump(
+            exclude_unset=True, exclude_none=True
+        ).items():
             setattr(student, field, value)
         self._db.commit()
         self._db.refresh(student)

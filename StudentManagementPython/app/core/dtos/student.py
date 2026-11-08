@@ -19,8 +19,22 @@ class StudentCreate(BaseModel):
         return name
 
 
-class StudentUpdate(StudentCreate):
-    """Complete set of editable student fields."""
+class StudentUpdate(BaseModel):
+    """Fields to update; every field is optional."""
+
+    name: str | None = Field(default=None, min_length=1, max_length=100)
+    age: int | None = Field(default=None, ge=1, le=120)
+    grade: GradeValue | None = None
+
+    @field_validator("name")
+    @classmethod
+    def strip_name(cls, value: str | None) -> str | None:
+        if value is None:
+            return None
+        name = value.strip()
+        if not name:
+            raise ValueError("Name must not be blank.")
+        return name
 
 
 class StudentRead(BaseModel):
