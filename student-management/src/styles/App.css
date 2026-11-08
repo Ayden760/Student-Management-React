@@ -152,6 +152,63 @@ select {
 	box-shadow: 0 14px 40px rgb(35 49 83 / 5%);
 }
 
+.error-message {
+	display: flex;
+	grid-column: 1 / -1;
+	align-items: center;
+	gap: 12px;
+	margin: 0;
+	padding: 14px 16px;
+	border: 1px solid #f1c5c5;
+	border-radius: 14px;
+	background: #fff5f5;
+	box-shadow: 0 8px 20px rgb(140 35 35 / 5%);
+	color: #922f36;
+	font-size: 13px;
+}
+
+.error-message p {
+	flex: 1;
+	margin: 0;
+	line-height: 1.5;
+}
+
+.error-message__icon,
+.form-error-message span {
+	display: grid;
+	width: 22px;
+	height: 22px;
+	flex: 0 0 auto;
+	place-items: center;
+	border-radius: 50%;
+	background: #f9dede;
+	color: #922f36;
+	font-size: 13px;
+	font-weight: 800;
+}
+
+.error-message__close {
+	width: 30px;
+	height: 30px;
+	flex: 0 0 auto;
+	border: 0;
+	border-radius: 8px;
+	background: transparent;
+	color: #922f36;
+	cursor: pointer;
+	font-size: 22px;
+	line-height: 1;
+}
+
+.error-message__close:hover {
+	background: #f9e3e3;
+}
+
+.error-message__close:focus-visible {
+	outline: 2px solid #c75e65;
+	outline-offset: 2px;
+}
+
 @media (max-width: 850px) {
 	.dashboard-layout {
 		grid-template-columns: 1fr;

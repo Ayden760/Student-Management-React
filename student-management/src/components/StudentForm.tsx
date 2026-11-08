@@ -33,6 +33,7 @@ export default function StudentForm({
   onCancelEdit,
   onUpdateStudent,
 }: StudentFormProps) {
+  const [formError, setFormError] = useState<string | null>(null);
   const [formData, setFormData] = useState<StudentFormData>({
     name: "",
     age: 0,
@@ -57,6 +58,7 @@ export default function StudentForm({
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) {
+    setFormError(null);
     //name is the type (name,age,grade) value is what it contains
     const { name, value } = event.target;
     //same :
@@ -82,22 +84,26 @@ export default function StudentForm({
 
     const name = formData.name.trim();
 
+    if (!name) {
+      setFormError("Please enter the student's name.");
+      return;
+    }
+
     if (
-      !name ||
       !Number.isInteger(formData.age) ||
       formData.age < 1 ||
       formData.age > 120
     ) {
-      alert("Please enter a valid name and age.");
-
+      setFormError("Please enter an age between 1 and 120.");
       return;
     }
 
     if (![1, 2, 3, 4, 5, 6].includes(formData.grade)) {
-      alert("Please select a valid grade.");
-
+      setFormError("Please select a valid grade.");
       return;
     }
+
+    setFormError(null);
 
     // Add student to parent component
     //onAddStudent(newStudent);
@@ -122,13 +128,19 @@ export default function StudentForm({
   }
 
   return (
-    <form className="student-form" onSubmit={handleSubmit}>
+    <form className="student-form" onSubmit={handleSubmit} noValidate>
       <h2>{editingStudent ? "Edit Student" : "Create a New Student"}</h2>
       <p className="form-description">
         {editingStudent
           ? `Update the details for ${editingStudent.name}.`
           : "Enter the details below to add a student."}
       </p>
+      {formError && (
+        <p className="form-error-message" role="alert">
+          <span aria-hidden="true">!</span>
+          {formError}
+        </p>
+      )}
 
       <div className="form-field">
         <label htmlFor="name">Name:</label>

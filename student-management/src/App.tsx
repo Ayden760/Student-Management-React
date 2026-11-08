@@ -23,6 +23,7 @@ function App() {
       try {
         const data = await getStudents();
         setStudents(data);
+        setError(null);
       } catch (error) {
         setError("Could not load students.");
       } finally {
@@ -84,6 +85,7 @@ function App() {
       const newStudent = await createStudent(studentData);
 
       setStudents((prevStudents) => [...prevStudents, newStudent]);
+      setError(null);
     } catch (error) {
       setError("Could not create student.");
       throw error;
@@ -97,6 +99,7 @@ function App() {
       setStudents((prevStudents) =>
         prevStudents.filter((student) => student.id !== id),
       );
+      setError(null);
     } catch (error) {
       setError("Could not delete student.");
     }
@@ -113,6 +116,7 @@ function App() {
       );
 
       setEditingStudent(null);
+      setError(null);
     } catch (error) {
       setError("Could not update student.");
     }
@@ -170,7 +174,22 @@ function App() {
         {/*Shows all Students*/}
         {loading && <p>Loading students...</p>}
 
-        {error && <p className="error-message">{error}</p>}
+        {error && (
+          <div className="error-message" role="alert">
+            <span className="error-message__icon" aria-hidden="true">
+              !
+            </span>
+            <p>{error}</p>
+            <button
+              className="error-message__close"
+              type="button"
+              aria-label="Dismiss error message"
+              onClick={() => setError(null)}
+            >
+              ×
+            </button>
+          </div>
+        )}
         <StudentList
           students={filteredStudents}
           onDeleteStudent={deleteStudent}
