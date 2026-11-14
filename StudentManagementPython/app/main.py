@@ -1,18 +1,23 @@
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
+from importlib import import_module
 
 from app.api.studentapi import router as students_router
 from app.implementation.services.student_service import StudentNotFoundError
 from app.infrastructure.database import create_database_tables
+from app.mcp.server import mcp
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+
+import_module("app.mcp.tools.student_tools")
 
 
 @asynccontextmanager
 async def lifespan(_: FastAPI) -> AsyncGenerator[None, None]:
     create_database_tables()
-    yield
+    async with mcp.session_manager.run():
+        yield
 
 
 app = FastAPI(
@@ -29,6 +34,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 # changes StudentNotFoundError to HTTP-404 answer
 @app.exception_handler(StudentNotFoundError)
@@ -48,3 +54,6 @@ def health_check() -> dict[str, str]:
 
 
 app.include_router(students_router, prefix="/api")
+
+# The MCP app serves the configured Streamable HTTP endpoint at /mcp.
+app.mount("/", mcp.streamable_http_app())

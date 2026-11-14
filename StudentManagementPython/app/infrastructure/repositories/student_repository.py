@@ -1,7 +1,8 @@
-from app.core.dtos.student import StudentCreate, StudentUpdate
-from app.core.models.student import Student
 from sqlalchemy import select
 from sqlalchemy.orm import Session
+
+from app.core.dtos.student import StudentCreate, StudentUpdate
+from app.core.models.student import Student
 
 
 class StudentRepository:

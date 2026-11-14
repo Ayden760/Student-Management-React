@@ -1,10 +1,11 @@
 import os
 from collections.abc import Generator
 
-from app.core.models.base import Base
-from app.core.models.student import Student
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
+
+from app.core.models.base import Base
+from app.core.models.student import Student
 
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./student_management.db")
 
@@ -20,7 +21,7 @@ def create_database_tables() -> None:
     Base.metadata.create_all(bind=engine, tables=[Student.__table__])
 
 
-def get_db() -> Generator[Session, None, None]:
+def get_db() -> Generator[Session]:
     """Yield one database session per request and always close it."""
     db = SessionLocal()
     try:

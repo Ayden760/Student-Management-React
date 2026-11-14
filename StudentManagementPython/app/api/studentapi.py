@@ -1,6 +1,7 @@
+from fastapi import APIRouter, Response, status
+
 from app.api.dependencies import StudentServiceDependency
 from app.core.dtos.student import StudentCreate, StudentRead, StudentUpdate
-from fastapi import APIRouter, Response, status
 
 router = APIRouter(prefix="/students", tags=["students"])
 

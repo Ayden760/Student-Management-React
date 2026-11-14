@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "school-management"
+version = "0.1.0"
+description = "School management system"
+requires-python = ">=3.13"
+
+dependencies = [
+    "fastapi>=0.162.4,<1.0",
+    "uvicorn[standard]>=0.54.0,<1.0",
+    "sqlalchemy>=2.1.2,<3.0",
+    "mcp[cli]>=2.3.0",
+]

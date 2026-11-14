@@ -25,7 +25,7 @@ StudentManagementPython/
 │   │   ├── repositories/    # Database access implementation
 │   │   └── database.py      # Engine, session lifecycle, table setup
 │   └── main.py              # FastAPI app, CORS, error handling
-├── requirements.txt
+├── pyproject.toml
 └── .gitignore
 ```
 
@@ -36,9 +36,10 @@ From this directory, create and activate a virtual environment, then install dep
 ```sh
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+python -m pip install .
 uvicorn app.main:app --reload
 ```
+python -m uvicorn app.main:app --reload
 
 On Windows PowerShell, activate with `.venv\Scripts\Activate.ps1` instead.
 
