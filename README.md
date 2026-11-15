@@ -20,6 +20,41 @@ A full-stack student management application built with React and FastAPI. It pro
 | Data access | SQLAlchemy 2, SQLite by default |
 | Additional interface | MCP Streamable HTTP |
 
+## Project Structure
+
+```text
+Student-Management/
+├── .vscode/
+│   └── mcp.json                     # VS Code MCP connection configuration
+├── StudentManagementPython/          # FastAPI backend
+│   ├── app/
+│   │   ├── api/                       # REST routes and dependency wiring
+│   │   ├── core/
+│   │   │   ├── dtos/                  # Request and response schemas
+│   │   │   └── models/                # SQLAlchemy models
+│   │   ├── implementation/services/   # Student business logic
+│   │   ├── infrastructure/
+│   │   │   ├── repositories/          # Database access
+│   │   │   └── database.py            # Engine, sessions, table setup
+│   │   ├── mcp/
+│   │   │   ├── server.py              # MCP server instance
+│   │   │   └── tools/                 # Student MCP tools
+│   │   └── main.py                    # FastAPI app and lifecycle
+│   ├── pyproject.toml
+│   └── uv.lock
+└── StudentManagementReact/           # React + TypeScript frontend
+    ├── src/
+    │   ├── api/                       # Backend HTTP client
+    │   ├── components/                # Forms, lists, cards, statistics
+    │   ├── styles/                    # App and component styles
+    │   ├── types/                     # Shared TypeScript types
+    │   ├── App.tsx                    # Main app and UI state
+    │   └── main.tsx                   # React entry point
+    ├── public/                        # Static assets
+    ├── package.json
+    └── vite.config.ts
+```
+
 ## Architecture
 
 ```mermaid
