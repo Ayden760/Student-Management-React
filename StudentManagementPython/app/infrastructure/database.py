@@ -1,11 +1,10 @@
 import os
 from collections.abc import Generator
 
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session, sessionmaker
-
 from app.core.models.base import Base
 from app.core.models.student import Student
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session, sessionmaker
 
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./student_management.db")
 

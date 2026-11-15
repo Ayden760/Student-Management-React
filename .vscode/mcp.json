@@ -1,6 +1,6 @@
 {
 	"servers": {
-		"my-mcp-server-d260861f": {
+		"my-mcp-server-bad273ff": {
 			"url": "http://127.0.0.1:8000/mcp",
 			"type": "http"
 		}
