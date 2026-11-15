@@ -24,7 +24,7 @@ function App() {
         const data = await getStudents();
         setStudents(data);
         setError(null);
-      } catch (error) {
+      } catch {
         setError("Could not load students.");
       } finally {
         setLoading(false);
@@ -100,7 +100,7 @@ function App() {
         prevStudents.filter((student) => student.id !== id),
       );
       setError(null);
-    } catch (error) {
+    } catch {
       setError("Could not delete student.");
     }
   }
@@ -117,7 +117,7 @@ function App() {
 
       setEditingStudent(null);
       setError(null);
-    } catch (error) {
+    } catch {
       setError("Could not update student.");
     }
   }
@@ -213,6 +213,7 @@ function App() {
             </div>
           </div>
           <StudentForm
+            key={editingStudent?.id ?? "new"}
             editingStudent={editingStudent}
             onAddStudent={addStudent}
             onUpdateStudent={updateStudent}

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import type { Student } from "../types/student";
 import "../styles/StudentForm.css";
 
@@ -34,26 +34,15 @@ export default function StudentForm({
   onUpdateStudent,
 }: StudentFormProps) {
   const [formError, setFormError] = useState<string | null>(null);
-  const [formData, setFormData] = useState<StudentFormData>({
-    name: "",
-    age: 0,
-    grade: 1,
-  });
-  useEffect(() => {
-    if (editingStudent) {
-      setFormData({
-        name: editingStudent.name,
-        age: editingStudent.age,
-        grade: editingStudent.grade,
-      });
-    } else {
-      setFormData({
-        name: "",
-        age: 0,
-        grade: 1,
-      });
-    }
-  }, [editingStudent]);
+  const [formData, setFormData] = useState<StudentFormData>(() =>
+    editingStudent
+      ? {
+          name: editingStudent.name,
+          age: editingStudent.age,
+          grade: editingStudent.grade,
+        }
+      : { name: "", age: 0, grade: 1 },
+  );
   // Shared handler for input and select elements
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
